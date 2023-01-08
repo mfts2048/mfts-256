@@ -1,0 +1,74 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-size: 14px;
+    // font-family: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    background-color: #f7f7f7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 80px 20px 180px 20px;
+    position: relative;
+    height: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+
+    .search {
+        max-width: 600px;
+        min-width: 500px;
+        width: 100%;
+        padding: 0px 24px;
+    }
+
+    .tabs {
+        padding: 24px 24px 10px 24px;
+    }
+
+    .result {
+        padding: 0 24px;
+        list-style: none;
+
+        >li {
+            margin-top: 20px;
+        }
+
+        .content {
+            white-space: break-spaces;
+        }
+
+        .update {
+            display: flex;
+        }
+    }
+
+    .upload {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: black;
+        z-index: 2;
+        padding: 24px;
+    }
+}
+
+.ellipsis {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #2080f0;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
