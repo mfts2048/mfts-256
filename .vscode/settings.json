@@ -2,12 +2,13 @@
     "cSpell.words": [
         "axios",
         "ionicons",
+        "mfts",
+        "nestjs",
+        "typeorm",
         "unref",
         "vicons",
         "vite",
         "vueuse",
-        "nestjs",
-        "typeorm",
         "yxswy"
     ]
 }

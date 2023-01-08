@@ -1,0 +1,20 @@
+{
+  "name": "mfts-256",
+  "version": "1.0.0",
+  "description": "mfts-256",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd ./client && npm run build && cd ../server && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfts2048/mfts-256.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mfts2048/mfts-256/issues"
+  },
+  "homepage": "https://github.com/mfts2048/mfts-256#readme"
+}
