@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const request = axios.create({
-    baseURL: 'http://111.231.55.202:3000/'
+    // baseURL: 'http://111.231.55.202:3000/'
+    baseURL: 'http://localhost:3000/'
 })
 
 type RequestBody = Record<string, any>

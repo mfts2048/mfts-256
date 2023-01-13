@@ -11,7 +11,7 @@ export class Articles {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'text' })
   content: string;
 
   @CreateDateColumn({

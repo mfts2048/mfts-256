@@ -113,7 +113,7 @@ console.log(3)
 
           <NSpace :wrap-item="true" item-style="width: 100%">
             <NUpload :show-file-list="false" @finish="bindUploadFinish" multiple directory-dnd
-              action="http://111.231.55.202:3000/articles/upload" :max="5">
+              action="http://localhost:3000/articles/upload" :max="5">
               <NUploadDragger>
                 <NIcon size="24" :depth="3">
                   <CloudUpload />
