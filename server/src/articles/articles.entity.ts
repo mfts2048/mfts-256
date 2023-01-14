@@ -14,6 +14,9 @@ export class Articles {
   @Column({ type: 'text' })
   content: string;
 
+  @Column({ default: false })
+  is_delete: boolean;
+
   @CreateDateColumn({
     name: 'create_time',
     nullable: true,
@@ -26,6 +29,6 @@ export class Articles {
   })
   update_time: Date | null;
 
-  @Column({ default: 'yxswy' })
+  @Column({ default: 'cxy' })
   create_by: string;
 }

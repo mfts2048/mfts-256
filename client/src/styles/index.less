@@ -1,3 +1,5 @@
+// @import 'ant-design-vue/dist/antd.dark.css';
+
 html,
 body {
     margin: 0;
@@ -5,7 +7,11 @@ body {
     height: 100vh;
     font-size: 14px;
     // font-family: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-    background-color: #f7f7f7;
+    // background-color: #f7f7f7;
+}
+
+body {
+    overflow-y: scroll;
 }
 
 * {
@@ -13,10 +19,10 @@ body {
 }
 
 .container {
-    padding: 20px 20px 180px 20px;
+    padding: 120px 20px 180px 20px;
     position: relative;
     height: 100%;
-    max-width: 1140px;
+    max-width: 940px;
     margin: 0 auto;
 
     .search {
@@ -68,7 +74,8 @@ body {
     display: flex;
     justify-content: flex-end;
     margin-top: 8px;
-    .ant-btn + .ant-btn {
+
+    .ant-btn+.ant-btn {
         margin-left: 8px;
     }
 }

@@ -25,14 +25,19 @@ export class ArticlesService {
   ) {}
 
   findAll(): Promise<Articles[]> {
-    return this.articlesRepository.find();
+    return this.articlesRepository.find({
+      where: {
+        is_delete: false,
+      },
+    });
   }
 
   find(body: FindArticleDTO): Promise<Articles[]> {
     return this.articlesRepository
       .createQueryBuilder('articles')
-      .where('articles.content like :content', {
+      .where('articles.content like :content and is_delete=:is_delete', {
         content: `%${body.keyword}%`,
+        is_delete: false,
       })
       .getMany();
   }
@@ -48,7 +53,9 @@ export class ArticlesService {
   }
 
   delete(body: DeleteArticleDTO) {
-    return this.articlesRepository.delete(body.id);
+    return this.articlesRepository.update(body.id, {
+      is_delete: true,
+    });
   }
 
   @Cron('* 10 * * * *') // 每小时一次，十分钟开始
@@ -60,7 +67,6 @@ export class ArticlesService {
   createTxt() {
     this.findAll().then((result) => {
       const contents = result.map((e) => e.content).join('\n\n');
-      console.log(path.join(root, 'logger', String(Date.now()) + '.txt'));
       fs.writeFile(
         path.join(root, 'logger', String(Date.now()) + '.txt'),
         contents,

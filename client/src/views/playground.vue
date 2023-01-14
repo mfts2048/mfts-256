@@ -2,12 +2,14 @@
 import { watch, ref, onMounted } from 'vue'
 import type { CollapseProps } from 'ant-design-vue';
 import { Input } from 'ant-design-vue'
-import { SettingOutlined } from '@ant-design/icons-vue';
+import { SettingOutlined, InboxOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import dayjs from "dayjs";
+import { message } from 'ant-design-vue';
 
 import { conversion } from '../utils'
 import MagicString from 'magic-string'
 import { articleDelete, articleFindAll, articleUpdate } from '../apis'
+import type { UploadChangeParam } from 'ant-design-vue';
 
 const TextArea = Input.TextArea
 const activeKey = ref(['1']);
@@ -77,39 +79,69 @@ const updateItem = async (item: DataType) => {
   search()
 }
 
-const deleteItem = async (item: DataType) => {
+const deleteItem = async (item: DataType, index: number) => {
   await articleDelete({
     id: item.id
   })
-
-  search()
+  list.value.splice(index, 1)
 }
 
+const fileList = ref([])
+const handleChange = (info: UploadChangeParam) => {
+  const status = info.file.status;
+  if (status !== 'uploading') {
+    console.log(info.file, info.fileList);
+  }
+  if (status === 'done') {
+    message.success(`${info.file.name} file uploaded successfully.`);
+    search()
+  } else if (status === 'error') {
+    message.error(`${info.file.name} file upload failed.`);
+  }
+};
+
+const handleDrop = (e: DragEvent) => {
+  console.log(e);
+}
 </script>
 
 <template>
   <div class="container">
+
+    <a-upload-dragger :showUploadList="false" v-model:fileList="fileList" name="file" :multiple="true"
+      action="http://localhost:3000/articles/upload" @change="handleChange" @drop="handleDrop">
+      <p class="ant-upload-drag-icon">
+        <inbox-outlined></inbox-outlined>
+      </p>
+      <p class="ant-upload-text">Click or drag file to this area to upload</p>
+      <p class="ant-upload-hint">
+        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+        band files
+      </p>
+    </a-upload-dragger>
+
+    <br>
+
     <a-input-search size="large" v-model:value="input3" placeholder="input search loading with enterButton"
       :loading="false" enter-button @search="search" />
-
-    <br>
     <br>
     <br>
 
+    <!-- <a-button type="primary">123465789</a-button> -->
     <a-collapse v-model:activeKey="activeKey" :expand-icon-position="expandIconPosition" accordion>
-      <a-collapse-panel v-for="item in list" :key="item.id" :header="item.header">
+      <a-collapse-panel v-for="(item, index) in list" :key="item.id" :header="item.header">
         <div v-if="!item.edit" class="html_content" v-html="item.s?.toString()"></div>
         <div v-else class="update">
           <TextArea type="textarea" v-model:value="item.content" autoSize></TextArea>
           <div class="flex-end">
             <a-button type="primary" @click="updateItem(item)">更新</a-button>
-            <a-button type="danger" @click="deleteItem(item)">删除</a-button>
           </div>
         </div>
 
         <template #extra>
           <span class="mr-18">{{ item.update_time }}</span>
-          <setting-outlined @click="(e: MouseEvent) => handleClick(e, item)" />
+          <setting-outlined class="mr-18" @click="(e: MouseEvent) => handleClick(e, item)" />
+          <close-outlined @click="deleteItem(item, index)" />
         </template>
       </a-collapse-panel>
     </a-collapse>
