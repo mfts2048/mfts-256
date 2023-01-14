@@ -3,20 +3,16 @@ import {
   NInput, NScrollbar, NConfigProvider,
   darkTheme, NButton,
   NSpace, NCard, NLayout, NTab,
-  NTabs, NDivider, useMessage,
-  NUpload, NUploadDragger,
-  NIcon, NH2
+  NTabs, NDivider, useMessage,NH2
 } from 'naive-ui'
 import type { GlobalTheme } from 'naive-ui'
 import { onMounted, ref, unref } from 'vue'
 import { conversion } from './utils'
 import MagicString from 'magic-string'
-import { CloudUpload } from '@vicons/ionicons5'
 import { articleDelete, articleFindAll, articleUpdate } from './apis/index'
 
 const theme = ref<GlobalTheme | null>(darkTheme)
 const tabs = ref<string>('common')
-const message = useMessage()
 
 interface DataType {
   id: number
@@ -85,20 +81,6 @@ const deleteItem = async (item: DataType) => {
   search()
 }
 
-const bindUploadFinish = () => {
-  message.success("success")
-  search()
-}
-
-console.log(1)
-requestIdleCallback(() => {
-  console.log(5)
-})
-console.log(2)
-requestAnimationFrame(() => {
-  console.log(4)
-})
-console.log(3)
 </script>
 
 <template>
@@ -112,14 +94,7 @@ console.log(3)
           </NH2>
 
           <NSpace :wrap-item="true" item-style="width: 100%">
-            <NUpload :show-file-list="false" @finish="bindUploadFinish" multiple directory-dnd
-              action="http://localhost:3000/articles/upload" :max="5">
-              <NUploadDragger>
-                <NIcon size="24" :depth="3">
-                  <CloudUpload />
-                </NIcon>
-              </NUploadDragger>
-            </NUpload>
+
             <NCard>
               <div class="search">
                 <NInput type="text" placeholder="可以清除" v-model:value="input3" clearable passively-activated

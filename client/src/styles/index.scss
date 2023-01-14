@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    padding: 80px 20px 180px 20px;
+    padding: 20px 20px 180px 20px;
     position: relative;
     height: 100%;
     max-width: 1140px;
@@ -28,23 +28,6 @@ body {
 
     .tabs {
         padding: 24px 24px 10px 24px;
-    }
-
-    .result {
-        padding: 0 24px;
-        list-style: none;
-
-        >li {
-            margin-top: 20px;
-        }
-
-        .content {
-            white-space: break-spaces;
-        }
-
-        .update {
-            display: flex;
-        }
     }
 
     .upload {
@@ -70,5 +53,22 @@ body {
 
     &:hover {
         text-decoration: underline;
+    }
+}
+
+.html_content {
+    white-space: break-spaces;
+}
+
+.mr-18 {
+    margin-right: 18px;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    .ant-btn + .ant-btn {
+        margin-left: 8px;
     }
 }
